@@ -1,0 +1,30 @@
+apiVersion: v1
+data:
+  mapRoles: |
+    - rolearn: arn:aws:iam::972589955939:role/codebuild-eks-cicd-build-app-service-role
+      username: build
+      groups:
+        - system:masters
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::972589955939:role/eks-nodegroup-ng-ma-NodeInstanceRole-1GFKA1037E1XO
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: "- userarn: arn:aws:iam::972589955939:user/skyler  \n  username: admin\n
+    \ groups:\n    - system:masters\n"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"mapUsers":"- userarn: arn:aws:iam::972589955939:user/skyler  \n  username: admin\n  groups:\n    - system:masters\n"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2022-07-28T00:12:12Z","name":"aws-auth","namespace":"kube-system","resourceVersion":"649961","uid":"48adcde1-c9b3-45d9-9ca6-a6d5fe5731f8"}}
+  creationTimestamp: "2022-07-28T00:12:12Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "650224"
+  uid: 48adcde1-c9b3-45d9-9ca6-a6d5fe5731f8
+data:
+  mapUsers: |
+    - userarn: arn:aws:iam::972589955939:user/skyler  
+      username: admin
+      groups:
+        - system:masters
